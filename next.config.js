@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  trailingSlash: true,
   images: {
-    domains: ['tile.openstreetmap.org', 'server.arcgisonline.com'],
+    unoptimized: true,
   },
   env: {
     NEXT_PUBLIC_APP_NAME: 'GeoResource AI Explorer',
