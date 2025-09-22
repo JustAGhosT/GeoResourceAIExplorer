@@ -25,6 +25,25 @@ Thumbs.db
 # Logs
 logs
 *.log
+.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Production
+dist/
+build/
+.next/
+out/
+
+# Misc
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Runtime data
 pids
@@ -34,14 +53,36 @@ pids
 
 # Coverage directory used by tools like istanbul
 coverage/
+*.lcov
 
-# dotenv environment variables file
+# nyc test coverage
+.nyc_output
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+
+# Environment variables
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-# Temporary folders
-tmp/
-temp/
+# Vercel
+.vercel
+
+# Azure deployment files
+.azure/
