@@ -7,7 +7,7 @@ module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
   
   return {
-    entry: './src/ts/app.ts',
+    entry: './src/index.tsx',
     output: {
       filename: 'js/bundle.js',
       path: path.resolve(__dirname, 'dist'),
@@ -17,7 +17,7 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.ts$/,
+          test: /\.tsx?$/,
           use: 'ts-loader',
           exclude: /node_modules/
         },
@@ -35,7 +35,7 @@ module.exports = (env, argv) => {
       ]
     },
     resolve: {
-      extensions: ['.ts', '.js']
+      extensions: ['.tsx', '.ts', '.js']
     },
     plugins: [
       new HtmlWebpackPlugin({
