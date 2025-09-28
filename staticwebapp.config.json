@@ -1,4 +1,6 @@
 {
+  "appLocation": "/",
+  "outputLocation": "dist",
   "routes": [
     {
       "route": "/*",
