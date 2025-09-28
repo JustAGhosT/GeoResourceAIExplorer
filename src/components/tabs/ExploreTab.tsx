@@ -1,51 +1,41 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import { Filter, Layers, Satellite, Map as MapIcon } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { useEffect, useReducer } from 'react'
 import MapComponent from '@/components/map/MapComponent'
+import { MapControls } from '@/components/map/MapControls'
 import { FilterPanel } from '@/components/panels/FilterPanel'
 import { MineDetailsPanel } from '@/components/panels/MineDetailsPanel'
-import { MOCK_MINES } from '@/data/mines'
-import { Mine } from '@/types'
 import { useFilter } from '@/components/providers/FilterProvider'
+import { useMineFilter } from '@/hooks/useMineFilter'
+import { exploreTabReducer, initialState } from '@/reducers/exploreTabReducer'
 
 export function ExploreTab() {
-  const [showFilters, setShowFilters] = useState(false)
-  const [showSatellite, setShowSatellite] = useState(false)
-  const [selectedMine, setSelectedMine] = useState<Mine | null>(null)
+  const [state, dispatch] = useReducer(exploreTabReducer, initialState)
+  const { showFilters, showSatellite, selectedMine, mines, loading, error } = state
   const { filters } = useFilter()
 
-  // Filter mines based on current filters
-  const filteredMines = useMemo(() => {
-    return MOCK_MINES.filter(mine => {
-      // Resource filter
-      if (filters.resources.length > 0) {
-        const hasMatchingResource = mine.resources.some(resource => 
-          filters.resources.includes(resource)
-        )
-        if (!hasMatchingResource) return false
+  useEffect(() => {
+    const fetchMines = async () => {
+      dispatch({ type: 'FETCH_MINES_START' })
+      try {
+        const response = await fetch('/api/mines')
+        if (!response.ok) {
+          throw new Error('Failed to fetch mines')
+        }
+        const data = await response.json()
+        dispatch({ type: 'FETCH_MINES_SUCCESS', payload: data })
+      } catch (err) {
+        dispatch({ type: 'FETCH_MINES_FAILURE', payload: err as Error })
       }
+    }
 
-      // Country filter
-      if (filters.countries.length > 0) {
-        if (!filters.countries.includes(mine.country)) return false
-      }
+    fetchMines()
+  }, [])
 
-      // Status filter
-      if (filters.status.length > 0) {
-        if (!filters.status.includes(mine.status)) return false
-      }
+  const filteredMines = useMineFilter(mines, filters)
 
-      // Production value filter
-      if (mine.productionValue < filters.minProductionValue || 
-          mine.productionValue > filters.maxProductionValue) {
-        return false
-      }
-
-      return true
-    })
-  }, [filters])
+  if (loading) return <div className="flex items-center justify-center h-full">Loading...</div>
+  if (error) return <div className="flex items-center justify-center h-full text-red-500">Error: {error.message}</div>
 
   return (
     <div className="h-full flex relative">
@@ -54,41 +44,16 @@ export function ExploreTab() {
         <MapComponent
           mines={filteredMines}
           selectedMine={selectedMine}
-          onMineSelect={setSelectedMine}
+          onMineSelect={(mine) => dispatch({ type: 'SELECT_MINE', payload: mine })}
           showSatellite={showSatellite}
         />
         
-        {/* Map Controls */}
-        <div className="absolute top-4 left-4 z-20 flex flex-col space-y-2">
-          <Button
-            variant={showFilters ? "default" : "outline"}
-            size="sm"
-            onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center space-x-2 bg-white shadow-md"
-          >
-            <Filter className="h-4 w-4" />
-            <span>Filters</span>
-          </Button>
-          
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center space-x-2 bg-white shadow-md"
-          >
-            <Layers className="h-4 w-4" />
-            <span>Layers</span>
-          </Button>
-          
-          <Button
-            variant={showSatellite ? "default" : "outline"}
-            size="sm"
-            onClick={() => setShowSatellite(!showSatellite)}
-            className="flex items-center space-x-2 bg-white shadow-md"
-          >
-            {showSatellite ? <Satellite className="h-4 w-4" /> : <MapIcon className="h-4 w-4" />}
-            <span>{showSatellite ? 'Satellite' : 'Map'}</span>
-          </Button>
-        </div>
+        <MapControls
+          showFilters={showFilters}
+          onShowFiltersChange={() => dispatch({ type: 'TOGGLE_FILTERS' })}
+          showSatellite={showSatellite}
+          onShowSatelliteChange={() => dispatch({ type: 'TOGGLE_SATELLITE' })}
+        />
 
         {/* Results Counter */}
         <div className="absolute top-4 right-4 z-20">
@@ -99,21 +64,23 @@ export function ExploreTab() {
       </div>
 
       {/* Filter Panel */}
-      {showFilters && (
-        <div className="w-80 bg-white border-l border-gray-200 shadow-lg z-30">
-          <FilterPanel onClose={() => setShowFilters(false)} />
+      <div className={`bg-white border-l border-gray-200 shadow-lg z-30 transition-all duration-300 ease-in-out overflow-hidden ${showFilters ? 'max-w-xs' : 'max-w-0'}`}>
+        <div className="w-80">
+          <FilterPanel onClose={() => dispatch({ type: 'SET_SHOW_FILTERS', payload: false })} />
         </div>
-      )}
+      </div>
 
       {/* Mine Details Panel */}
-      {selectedMine && (
-        <div className="w-96 bg-white border-l border-gray-200 shadow-lg z-30">
-          <MineDetailsPanel 
-            mine={selectedMine} 
-            onClose={() => setSelectedMine(null)} 
-          />
+      <div className={`bg-white border-l border-gray-200 shadow-lg z-30 transition-all duration-300 ease-in-out overflow-hidden ${selectedMine ? 'max-w-sm' : 'max-w-0'}`}>
+        <div className="w-96 h-full">
+          {selectedMine && (
+            <MineDetailsPanel
+              mine={selectedMine}
+              onClose={() => dispatch({ type: 'SELECT_MINE', payload: null })}
+            />
+          )}
         </div>
-      )}
+      </div>
     </div>
   )
 }
