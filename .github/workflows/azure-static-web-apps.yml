@@ -38,6 +38,11 @@ jobs:
           app_location: "/"
           api_location: ""
           output_location: "out"
+          # Skip (don't fail) the deploy when the deployment token isn't set,
+          # e.g. on forks/PRs or before the Azure SWA secret is configured.
+          # The build above still runs and gates the PR; deploy resumes once
+          # AZURE_STATIC_WEB_APPS_API_TOKEN is provided.
+          skip_deploy_on_missing_secrets: true
 
   close_pull_request:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -49,3 +54,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           action: "close"
+          skip_deploy_on_missing_secrets: true

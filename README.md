@@ -32,6 +32,11 @@ AI-integrated resource exploration platform with configurable regions, multiple 
 
 ![Analytics Dashboard](https://github.com/user-attachments/assets/fa5bf6e8-1a74-45f9-9f87-1cb86cf715ef)
 
+### 🏛️ Heritage View (Springs / Far East Rand)
+- **Survey-plan map** of the Springs goldfield c.1938 — the eight gold mines that briefly made it the world's largest single gold-producing area, plus the 1888 Great Eastern coal shaft in Pioneer Park where the district began
+- **Click-through mine records** with dates, coordinates and historical notes, and a one-tap "Open on Google Maps"
+- **Note on data:** positions in this view and the accompanying `Springs / Far East Rand` entries in the mine dataset are **approximate, historical placements** compiled from local-history sources and satellite imagery (accurate to roughly a kilometre), not surveyed coordinates. They are illustrative and should not be used for navigation, property or undermining decisions. Historical production is not represented (`productionValue` is `0` for these entries).
+
 ### 🎯 Resource Types Tracked
 1. **Diamonds** - Including famous mines like Jwaneng and Cullinan
 2. **Gold** - Witwatersrand and other major gold fields
