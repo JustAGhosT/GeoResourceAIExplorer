@@ -168,6 +168,139 @@ export const MOCK_MINES: Mine[] = [
     yearEstablished: 1957,
     owner: 'Vedanta Resources',
     size: 'large'
+  },
+
+  // --- Springs / Far East Rand goldfield (historical) ---
+  // Approximate, historical positions compiled from local-history sources and
+  // satellite imagery — not surveyed coordinates. These mines are long closed,
+  // so status is 'inactive' and productionValue is left at 0 (historical output
+  // is not represented here). See src/data/springsHeritage.ts and the Heritage
+  // view for the fuller story.
+  {
+    id: '11',
+    name: 'Geduld Proprietary Mine',
+    latitude: -26.284,
+    longitude: 28.462,
+    country: 'South Africa',
+    region: 'Gauteng',
+    resources: ['gold', 'uranium'],
+    status: 'inactive',
+    productionValue: 0,
+    yearEstablished: 1909,
+    owner: 'Geduld Proprietary Mines (historic)',
+    size: 'large'
+  },
+  {
+    id: '12',
+    name: 'East Geduld Mine',
+    latitude: -26.284,
+    longitude: 28.505,
+    country: 'South Africa',
+    region: 'Gauteng',
+    resources: ['gold', 'uranium'],
+    status: 'inactive',
+    productionValue: 0,
+    yearEstablished: 1935,
+    owner: 'East Geduld Mines (historic)',
+    size: 'large'
+  },
+  {
+    id: '13',
+    name: 'Springs Mines',
+    latitude: -26.283,
+    longitude: 28.430,
+    country: 'South Africa',
+    region: 'Gauteng',
+    resources: ['gold', 'uranium'],
+    status: 'inactive',
+    productionValue: 0,
+    yearEstablished: 1908,
+    owner: 'Springs Mines Ltd (historic)',
+    size: 'large'
+  },
+  {
+    id: '14',
+    name: 'Daggafontein Mines',
+    latitude: -26.295,
+    longitude: 28.480,
+    country: 'South Africa',
+    region: 'Gauteng',
+    resources: ['gold', 'uranium'],
+    status: 'inactive',
+    productionValue: 0,
+    yearEstablished: 1937,
+    owner: 'Daggafontein Mines (historic)',
+    size: 'large'
+  },
+  {
+    id: '15',
+    name: 'Grootvlei Proprietary Mines',
+    latitude: -26.3235,
+    longitude: 28.4875,
+    country: 'South Africa',
+    region: 'Gauteng',
+    resources: ['gold', 'uranium'],
+    status: 'inactive',
+    productionValue: 0,
+    yearEstablished: 1938,
+    owner: 'Grootvlei Proprietary Mines (historic)',
+    size: 'large'
+  },
+  {
+    id: '16',
+    name: 'Brakpan Mines',
+    latitude: -26.243,
+    longitude: 28.373,
+    country: 'South Africa',
+    region: 'Gauteng',
+    resources: ['gold', 'uranium'],
+    status: 'inactive',
+    productionValue: 0,
+    yearEstablished: 1910,
+    owner: 'Brakpan Mines Ltd (historic)',
+    size: 'large'
+  },
+  {
+    id: '17',
+    name: 'Modder East (New Modder)',
+    latitude: -26.205,
+    longitude: 28.360,
+    country: 'South Africa',
+    region: 'Gauteng',
+    resources: ['gold'],
+    status: 'inactive',
+    productionValue: 0,
+    yearEstablished: 1913,
+    owner: 'Modderfontein East (historic)',
+    size: 'large'
+  },
+  {
+    id: '18',
+    name: 'Sub Nigel',
+    latitude: -26.420,
+    longitude: 28.470,
+    country: 'South Africa',
+    region: 'Gauteng',
+    resources: ['gold', 'uranium'],
+    status: 'inactive',
+    productionValue: 0,
+    yearEstablished: 1909,
+    owner: 'Sub Nigel Ltd (historic)',
+    size: 'large'
+  },
+  {
+    id: '19',
+    name: 'Great Eastern Colliery (Pioneer Park shaft)',
+    latitude: -26.248,
+    longitude: 28.454,
+    country: 'South Africa',
+    region: 'Gauteng',
+    resources: ['coal'],
+    status: 'inactive',
+    productionValue: 0,
+    yearEstablished: 1888,
+    owner: 'Great Eastern Colliery (historic)',
+    size: 'medium'
   }
 ];
 
