@@ -87,8 +87,8 @@ export const SPRINGS_HERITAGE: HeritageSite[] = [
     kind: 'gold',
     lat: -26.3235,
     lon: 28.4875,
-    est: '1932 · prod 1938',
-    note: 'South-east toward Nigel; long-lived, later notorious for the acid mine water from its pumping shafts after pumping stopped in 2011.',
+    est: 'reg. 1904 · gold from 1938',
+    note: 'Grootvlei Proprietary Mines were registered in 1904; the modern gold mine dates from the late 1930s. South-east toward Nigel; later notorious for the acid mine water from its pumping shafts after pumping stopped in 2011.',
   },
   {
     id: 'sub-nigel',

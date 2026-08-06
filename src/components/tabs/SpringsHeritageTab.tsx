@@ -172,21 +172,10 @@ export function SpringsHeritageTab() {
                   const on = site.id === selected
                   const labelLeft = site.lon > 28.49
                   return (
-                    <g
-                      key={site.id}
-                      role="button"
-                      tabIndex={0}
-                      aria-pressed={on}
-                      aria-label={`${site.name}, ${site.kind === 'coal' ? 'coal shaft' : 'gold mine'}`}
-                      className="cursor-pointer focus:outline-none"
-                      onClick={() => setSelected(site.id)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault()
-                          setSelected(site.id)
-                        }
-                      }}
-                    >
+                    {/* Markers are a pointer convenience on top of a labelled diagram;
+                        the roster table below is the keyboard-accessible control. */}
+                    <g key={site.id} className="cursor-pointer" onClick={() => setSelected(site.id)}>
+                      <title>{`${site.name} — ${site.kind === 'coal' ? 'coal shaft' : 'gold mine'}`}</title>
                       {on && <circle cx={x} cy={y} r={20} fill="none" stroke={COL.sel} strokeWidth={2} />}
                       <circle cx={x} cy={y} r={22} fill="transparent" />
                       {site.kind === 'context' ? (
@@ -294,16 +283,17 @@ export function SpringsHeritageTab() {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {SPRINGS_HERITAGE.map((s) => (
-                  <tr
-                    key={s.id}
-                    className={`cursor-pointer hover:bg-gray-50 ${s.id === selected ? 'bg-amber-50' : ''}`}
-                    onClick={() => setSelected(s.id)}
-                  >
+                  <tr key={s.id} className={s.id === selected ? 'bg-amber-50' : 'hover:bg-gray-50'}>
                     <td className="px-6 py-3 whitespace-nowrap">
-                      <div className="flex items-center">
+                      <button
+                        type="button"
+                        onClick={() => setSelected(s.id)}
+                        aria-pressed={s.id === selected}
+                        className="flex items-center text-left rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+                      >
                         <span className="w-2.5 h-2.5 rounded-full mr-3" style={{ background: colourFor(s.kind) }} />
-                        <span className="text-sm font-medium text-gray-900">{s.name}</span>
-                      </div>
+                        <span className="text-sm font-medium text-gray-900 hover:text-amber-700">{s.name}</span>
+                      </button>
                     </td>
                     <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-500 font-mono">
                       {s.kind === 'coal' ? 'coal' : s.kind === 'context' ? 'gold · ctx' : 'gold'}

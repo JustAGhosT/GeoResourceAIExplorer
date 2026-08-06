@@ -242,7 +242,8 @@ export const MOCK_MINES: Mine[] = [
     resources: ['gold', 'uranium'],
     status: 'inactive',
     productionValue: 0,
-    yearEstablished: 1938,
+    // Registered 1904 (SA History Online); the modern gold mine dates from the late 1930s.
+    yearEstablished: 1904,
     owner: 'Grootvlei Proprietary Mines (historic)',
     size: 'large'
   },
