@@ -87,9 +87,9 @@ export function SpringsHeritageTab() {
     rec.kind === 'coal' ? 'Coal shaft' : rec.kind === 'context' ? 'Gold · context (Nigel)' : 'Gold mine & shaft'
   const mapsQuery = `${rec.lat.toFixed(4)},${rec.lon.toFixed(4)}`
 
-  const reefPath = `M ${geo.px(28.345)} ${geo.py(-26.3)} C ${geo.px(28.41)} ${geo.py(-26.335)}, ${geo.px(
-    28.47
-  )} ${geo.py(-26.3)}, ${geo.px(28.53)} ${geo.py(-26.255)}`
+  const reefPath =
+    `M ${geo.px(28.345)} ${geo.py(-26.3)} ` +
+    `C ${geo.px(28.41)} ${geo.py(-26.335)}, ${geo.px(28.47)} ${geo.py(-26.3)}, ${geo.px(28.53)} ${geo.py(-26.255)}`
 
   return (
     <div className="h-full overflow-y-auto custom-scrollbar bg-gray-50">
@@ -171,9 +171,9 @@ export function SpringsHeritageTab() {
                   const col = colourFor(site.kind)
                   const on = site.id === selected
                   const labelLeft = site.lon > 28.49
+                  // Markers are a pointer convenience on top of a labelled diagram;
+                  // the roster table below is the keyboard-accessible control.
                   return (
-                    {/* Markers are a pointer convenience on top of a labelled diagram;
-                        the roster table below is the keyboard-accessible control. */}
                     <g key={site.id} className="cursor-pointer" onClick={() => setSelected(site.id)}>
                       <title>{`${site.name} — ${site.kind === 'coal' ? 'coal shaft' : 'gold mine'}`}</title>
                       {on && <circle cx={x} cy={y} r={20} fill="none" stroke={COL.sel} strokeWidth={2} />}

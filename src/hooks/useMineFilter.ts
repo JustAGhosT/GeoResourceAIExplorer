@@ -1,8 +1,7 @@
 import { useMemo } from 'react'
-import { Mine } from '@/types'
-import { FilterState } from '@/components/providers/FilterProvider'
+import { Mine, FilterOptions } from '@/types'
 
-export function useMineFilter(mines: Mine[], filters: FilterState) {
+export function useMineFilter(mines: Mine[], filters: FilterOptions) {
   const filteredMines = useMemo(() => {
     return mines.filter(mine => {
       // Resource filter
